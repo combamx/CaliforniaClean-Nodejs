@@ -18,4 +18,10 @@ router.get("/dbtest", async (req, res) => {
   }
 });
 
+const customers = require('../controllers/customers.controller');
+const buildings = require('../controllers/buildings.controller');
+
+router.use('/customers', customers);
+router.use('/buildings', buildings);
+
 module.exports = router;
