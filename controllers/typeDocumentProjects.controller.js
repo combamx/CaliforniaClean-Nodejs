@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { poolPromise } = require('../config/db');
+const verifyToken = require('../middleware/auth.middleware');
 
 // GET /api/type-document-projects
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query('SELECT * FROM TypeDocumentProjects');

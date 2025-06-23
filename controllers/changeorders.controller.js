@@ -10,7 +10,8 @@ const validate = require('../middleware/validate');
 router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
-    const result = await pool.request().query('SELECT * FROM ChangeOrders');
+    const result = await pool.request()
+      .query('SELECT * FROM ChangeOrders');
     res.status(200).json(result.recordset);
   } catch (err) {
     console.error('Error al obtener change orders:', err.message);

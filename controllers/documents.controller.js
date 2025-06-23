@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { poolPromise } = require('../config/db');
 const { getQuery } = require('../utils/queryLoader');
+const verifyToken = require('../middleware/auth.middleware');
 
 // GET /api/documents
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
     const query = getQuery('Documents', 'all');

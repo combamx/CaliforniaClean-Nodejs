@@ -7,7 +7,7 @@ const validate = require('../middleware/validate');
 const { commentsWOValidationRules } = require('../validators/commentswo.validator');
 
 // GET /api/commentswo - obtener todos
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query('SELECT * FROM CommentsWO');

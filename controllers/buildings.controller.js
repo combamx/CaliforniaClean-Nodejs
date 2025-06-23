@@ -7,7 +7,7 @@ const verifyToken = require('../middleware/auth.middleware');
 const validate = require('../middleware/validate');
 
 // GET /api/buildings
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query('SELECT * FROM Buildings');

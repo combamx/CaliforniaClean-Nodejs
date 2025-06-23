@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { poolPromise } = require('../config/db');
+const verifyToken = require('../middleware/auth.middleware');
 
 // GET /api/status-dates
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query('SELECT * FROM StatusDate');
