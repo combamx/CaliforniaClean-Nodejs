@@ -27,7 +27,7 @@ const changeOrderValidationRules = [
 
   body('Description')
     .optional({ nullable: true })
-    .isLength({ max: 1 }).withMessage('La descripción debe tener máximo 1 carácter'),
+    .isLength({ max: 255 }).withMessage('La descripción debe tener máximo 255 carácter'),
 
   body('User')
     .notEmpty().withMessage('El usuario es obligatorio')

@@ -1,0 +1,154 @@
+{
+  "Buildings": {
+    "all": "SELECT * FROM Buildings",
+    "id": "SELECT * FROM Buildings WHERE ID = @ID",
+    "search": "SELECT * FROM Buildings WHERE Description LIKE @Description",
+    "post": "INSERT INTO Buildings ([Description], IDTypeProject, [Order]) VALUES (@Description, @IDTypeProject, @Order)",
+    "put": "UPDATE Buildings SET [Description] = @Description, IDTypeProject = @IDTypeProject, [Order] = @Order WHERE ID = @ID",
+    "delete": "DELETE FROM Buildings WHERE ID = @ID"
+  },
+  "ChangeOrders": {
+    "all": "SELECT * FROM ChangeOrders",
+    "id": "SELECT * FROM ChangeOrders WHERE ID = @ID",
+    "search": "SELECT * FROM ChangeOrders WHERE Description LIKE @Description",
+    "post": "INSERT INTO ChangeOrders (Clave, DateChange, Amount, IDStatusCO, IDWorkOrder, IDProject, Description, [User], Status) VALUES (@Clave, @DateChange, @Amount, @IDStatusCO, @IDWorkOrder, @IDProject, @Description, @User, @Status)",
+    "put": "UPDATE ChangeOrders SET Clave = @Clave, DateChange = @DateChange, Amount = @Amount, IDStatusCO = @IDStatusCO, IDWorkOrder = @IDWorkOrder, IDProject = @IDProject, Description = @Description, [User] = @User, Status = @Status WHERE ID = @ID",
+    "delete": "DELETE FROM ChangeOrders WHERE ID = @ID"
+  },
+  "CommentsWO": {
+    "all": "SELECT * FROM CommentsWO",
+    "id": "SELECT * FROM CommentsWO WHERE ID = @ID",
+    "search": "SELECT * FROM CommentsWO WHERE Description LIKE @Description",
+    "post": "INSERT INTO CommentsWO (Description, IDWorkOrder) VALUES (@Description, @IDWorkOrder)",
+    "put": "UPDATE CommentsWO SET Description = @Description, IDWorkOrder = @IDWorkOrder WHERE ID = @ID",
+    "delete": "DELETE FROM CommentsWO WHERE ID = @ID"
+  },
+  "Customers": {
+    "all": "SELECT * FROM Customers",
+    "id": "SELECT * FROM Customers WHERE ID = @ID",
+    "search": "SELECT * FROM Customers WHERE CompanyName LIKE @CompanyName OR Email LIKE @Email OR Address LIKE @Address",
+    "post": "INSERT INTO Customers (CompanyName, Address, City, Zip, Phone, Status, Email) VALUES (@CompanyName, @Address, @City, @Zip, @Phone, @Status, @Email)",
+    "put": "UPDATE Customers SET CompanyName = @CompanyName, Address = @Address, City = @City, Zip = @Zip, Phone = @Phone, Status = @Status, Email = @Email WHERE ID = @ID",
+    "delete": "DELETE FROM Customers WHERE ID = @ID"
+  },
+  "Documents": {
+    "all": "SELECT * FROM Documents",
+    "id": "SELECT * FROM Documents WHERE ID = @ID",
+    "search": "SELECT * FROM Documents WHERE Description LIKE @Description",
+    "post": "INSERT INTO Documents (...) VALUES (...)",
+    "put": "UPDATE Documents SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM Documents WHERE ID = @ID"
+  },
+  "PrintOrdenWorks": {
+    "all": "SELECT * FROM PrintOrdenWorks",
+    "id": "SELECT * FROM PrintOrdenWorks WHERE ID = @ID",
+    "search": "SELECT * FROM PrintOrdenWorks WHERE Description LIKE @Description",
+    "post": "INSERT INTO PrintOrdenWorks (...) VALUES (...)",
+    "put": "UPDATE PrintOrdenWorks SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM PrintOrdenWorks WHERE ID = @ID"
+  },
+  "Projects": {
+    "all": "SELECT * FROM Projects",
+    "id": "SELECT * FROM Projects WHERE ID = @ID",
+    "search": "SELECT * FROM Projects WHERE Description LIKE @Description",
+    "post": "INSERT INTO Projects (...) VALUES (...)",
+    "put": "UPDATE Projects SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM Projects WHERE ID = @ID"
+  },
+  "Providers": {
+    "all": "SELECT * FROM Providers",
+    "id": "SELECT * FROM Providers WHERE ID = @ID",
+    "search": "SELECT * FROM Providers WHERE Description LIKE @Description",
+    "post": "INSERT INTO Providers (...) VALUES (...)",
+    "put": "UPDATE Providers SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM Providers WHERE ID = @ID"
+  },
+  "Sellers": {
+    "all": "SELECT * FROM Sellers",
+    "id": "SELECT * FROM Sellers WHERE ID = @ID",
+    "search": "SELECT * FROM Sellers WHERE Description LIKE @Description",
+    "post": "INSERT INTO Sellers (...) VALUES (...)",
+    "put": "UPDATE Sellers SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM Sellers WHERE ID = @ID"
+  },
+  "StatusDates": {
+    "all": "SELECT * FROM StatusDates",
+    "id": "SELECT * FROM StatusDates WHERE ID = @ID",
+    "search": "SELECT * FROM StatusDates WHERE Description LIKE @Description",
+    "post": "INSERT INTO StatusDates (...) VALUES (...)",
+    "put": "UPDATE StatusDates SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM StatusDates WHERE ID = @ID"
+  },
+  "StatusProjects": {
+    "all": "SELECT * FROM StatusProjects",
+    "id": "SELECT * FROM StatusProjects WHERE ID = @ID",
+    "search": "SELECT * FROM StatusProjects WHERE Description LIKE @Description",
+    "post": "INSERT INTO StatusProjects (...) VALUES (...)",
+    "put": "UPDATE StatusProjects SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM StatusProjects WHERE ID = @ID"
+  },
+  "StatusWorkOrders": {
+    "all": "SELECT * FROM StatusWorkOrders",
+    "id": "SELECT * FROM StatusWorkOrders WHERE ID = @ID",
+    "search": "SELECT * FROM StatusWorkOrders WHERE Description LIKE @Description",
+    "post": "INSERT INTO StatusWorkOrders (...) VALUES (...)",
+    "put": "UPDATE StatusWorkOrders SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM StatusWorkOrders WHERE ID = @ID"
+  },
+  "TypeDocumentProjects": {
+    "all": "SELECT * FROM TypeDocumentProjects",
+    "id": "SELECT * FROM TypeDocumentProjects WHERE ID = @ID",
+    "search": "SELECT * FROM TypeDocumentProjects WHERE Description LIKE @Description",
+    "post": "INSERT INTO TypeDocumentProjects (...) VALUES (...)",
+    "put": "UPDATE TypeDocumentProjects SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM TypeDocumentProjects WHERE ID = @ID"
+  },
+  "TypesOrderWorks": {
+    "all": "SELECT * FROM TypesOrderWorks",
+    "id": "SELECT * FROM TypesOrderWorks WHERE ID = @ID",
+    "search": "SELECT * FROM TypesOrderWorks WHERE Description LIKE @Description",
+    "post": "INSERT INTO TypesOrderWorks (...) VALUES (...)",
+    "put": "UPDATE TypesOrderWorks SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM TypesOrderWorks WHERE ID = @ID"
+  },
+  "TypesProjects": {
+    "all": "SELECT * FROM TypesProjects",
+    "id": "SELECT * FROM TypesProjects WHERE ID = @ID",
+    "search": "SELECT * FROM TypesProjects WHERE Description LIKE @Description",
+    "post": "INSERT INTO TypesProjects (...) VALUES (...)",
+    "put": "UPDATE TypesProjects SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM TypesProjects WHERE ID = @ID"
+  },
+  "VListProjects": {
+    "all": "SELECT * FROM VListProjects",
+    "id": "SELECT * FROM VListProjects WHERE ID = @ID",
+    "search": "SELECT * FROM VListProjects WHERE Description LIKE @Description",
+    "post": "INSERT INTO VListProjects (...) VALUES (...)",
+    "put": "UPDATE VListProjects SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM VListProjects WHERE ID = @ID"
+  },
+  "Workers": {
+    "all": "SELECT * FROM Workers",
+    "id": "SELECT * FROM Workers WHERE ID = @ID",
+    "search": "SELECT * FROM Workers WHERE Description LIKE @Description",
+    "post": "INSERT INTO Workers (...) VALUES (...)",
+    "put": "UPDATE Workers SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM Workers WHERE ID = @ID"
+  },
+  "WorkOrdersAssigneds": {
+    "all": "SELECT * FROM WorkOrdersAssigneds",
+    "id": "SELECT * FROM WorkOrdersAssigneds WHERE ID = @ID",
+    "search": "SELECT * FROM WorkOrdersAssigneds WHERE Description LIKE @Description",
+    "post": "INSERT INTO WorkOrdersAssigneds (...) VALUES (...)",
+    "put": "UPDATE WorkOrdersAssigneds SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM WorkOrdersAssigneds WHERE ID = @ID"
+  },
+  "WorkOrdersOvertime": {
+    "all": "SELECT * FROM WorkOrdersOvertime",
+    "id": "SELECT * FROM WorkOrdersOvertime WHERE ID = @ID",
+    "search": "SELECT * FROM WorkOrdersOvertime WHERE Description LIKE @Description",
+    "post": "INSERT INTO WorkOrdersOvertime (...) VALUES (...)",
+    "put": "UPDATE WorkOrdersOvertime SET ... WHERE ID = @ID",
+    "delete": "DELETE FROM WorkOrdersOvertime WHERE ID = @ID"
+  }
+}

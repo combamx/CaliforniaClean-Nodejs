@@ -5,18 +5,69 @@ const { poolPromise } = require('../config/db');
 const { customerValidationRules } = require('../validators/customer.validator');
 const verifyToken = require('../middleware/auth.middleware');
 const validate = require('../middleware/validate');
+const { getQuery } = require('../utils/queryLoader');
 
 
 router.get('/', verifyToken, async (req, res) => {
   
   try {
     const pool = await poolPromise;
-    const result = await pool.request().query('SELECT * FROM Customers');
+    const query = getQuery('Customers', 'all');
+    const result = await pool.request().query(query);
     res.status(200).json(result.recordset);
   } catch (err) {
     console.error('Error al obtener clientes:', err.message);
     console.error(err.stack);
     res.status(500).json({ message: `Error al obtener clientes: ${err.message}` });
+  }
+});
+
+router.get('/search', verifyToken, async (req, res) => {
+  const { CompanyName, Address, Email } = req.query;
+
+  console.log('Search query:', req);
+
+  if (!req) {
+    return res.status(400).json({ message: 'Query parameter "q" is required' });
+  }
+
+  try {
+    const pool = await poolPromise;
+    const query = getQuery('Customers', 'search');
+    const result = await pool.request()
+      .input('CompanyName', sql.NVarChar, `%${CompanyName}%`)
+      .input('Address', sql.NVarChar, `%${Address}%`)
+      .input('Email', sql.NVarChar, `%${Email}%`)
+      .query(query);
+
+    res.status(200).json(result.recordset);
+  } catch (err) {
+    console.error('Error al buscar clientes:', err.message);
+    console.error(err.stack);
+    res.status(500).json({ message: `Error al buscar clientes: ${err.message}` });
+  }
+});
+
+router.get('/:id', verifyToken, async (req, res) => {
+  const { id } = req.params;
+
+  console.log('GET id param:', id);
+
+  try {
+    const pool = await poolPromise;
+    const query = getQuery('Customers', 'id');
+    const result = await pool.request()
+      .input('ID', sql.Int, id)
+      .query(query);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Cliente no encontrado' });
+    }
+    res.status(200).json(result.recordset[0]);
+  } catch (err) {
+    console.error('Error al obtener cliente:', err.message);
+    console.error(err.stack);
+    res.status(500).json({ message: `Error al obtener cliente: ${err.message}` });
   }
 });
 
@@ -27,6 +78,7 @@ router.post('/', verifyToken, customerValidationRules, validate, async (req, res
 
   try {
     const pool = await poolPromise;
+    const query = getQuery('Customers', 'post');
     const result = await pool.request()
       .input('CompanyName', sql.NVarChar, CompanyName)
       .input('Address', sql.NVarChar, CompanyName)
@@ -35,7 +87,7 @@ router.post('/', verifyToken, customerValidationRules, validate, async (req, res
       .input('Email', sql.NVarChar, Email)
       .input('Phone', sql.NVarChar, Phone)
       .input('Status', sql.Bit, Status)
-      .query('INSERT INTO Customers (CompanyName, Address, City, Zip, Email, Phone, Status) VALUES (@CompanyName, @Address, @City, @Zip, @Email, @Phone, @Status)');
+      .query(query);
 
     if (result.rowsAffected[0] === 0) {
       return res.status(404).json({ message: 'Cliente no creado' });
@@ -113,6 +165,5 @@ router.delete('/:id', verifyToken, async (req, res) => {
     res.status(500).json({ message: `Error al eliminar cliente: ${err.message}` });
   }
 });
-
 
 module.exports = router;

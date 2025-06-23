@@ -19,6 +19,37 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET buildings by search on Description (LIKE)
+router.get('/search', verifyToken, async (req, res) => {
+  const { Description } = req.query;
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request()
+      .input('Description', sql.NVarChar, `%${Description}%`)
+      .query('SELECT * FROM Buildings WHERE Description LIKE @Description');
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500).json({ message: 'Error en búsqueda de edificios', error: err.message });
+  }
+});
+
+// GET building by ID
+router.get('/:id', verifyToken, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request()
+      .input('ID', sql.Int, id)
+      .query('SELECT * FROM Buildings WHERE ID = @ID');
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Edificio no encontrado' });
+    }
+    res.json(result.recordset[0]);
+  } catch (err) {
+    res.status(500).json({ message: 'Error al buscar edificio', error: err.message });
+  }
+});
+
 // POST new building
 router.post('/', verifyToken, buildingValidationRules, validate, async (req, res) => {
   const { Description, IDTypeProject, Order } = req.body;
